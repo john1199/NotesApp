@@ -15,6 +15,9 @@ const NoteSchema = new Schema({
     type: Date,
     default: Date.now,
   },
+  user: {
+    type: String,
+  }
 });
 
 module.exports = moongose.model("Note", NoteSchema);
