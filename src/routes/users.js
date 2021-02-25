@@ -40,7 +40,7 @@ router.post("/users/signup", async (req, res) => {
       confirm_password,
     });
   } else {
-    const emailuser = await User.findOne({ email: email });
+    const emailuser = await User.findOne({ email: email }).lean();
     if (emailuser) {
       req.flash("error_msg", "The email is already in use");
       res.redirect("/users/signup");
@@ -51,6 +51,11 @@ router.post("/users/signup", async (req, res) => {
     req.flash("success_msg", "You are registred");
     res.redirect("/users/signin");
   }
+});
+
+router.get("/users/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
 });
 
 module.exports = router;
